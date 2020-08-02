@@ -2,6 +2,8 @@
 
 const Hapi = require('@hapi/hapi')
 const inert = require('@hapi/inert')
+const vision = require('@hapi/vision')
+const handlebars = require('handlebars')
 const path = require('path')
 
 const server = Hapi.server({
@@ -15,15 +17,30 @@ const server = Hapi.server({
 })
 
 async function init(){
-
     try {
-        await server.register(inert);
+        // registramos las utilidades 
+        await server.register(inert)
+        await server.register(vision)
+
+        // Configuramos las vistas
+        server.views({
+            engines: {
+                hbs: handlebars
+            },
+            relativeTo: __dirname,
+            path: 'views',
+            layout: true,
+            layoutPath: 'views'
+        })
+
         // Servimos el index.html
         server.route({
             method: 'GET',
-            path: '/home',
+            path: '/',
             handler: (req, h) => {
-                return h.file('index.html')
+                return h.view('index', {
+                    title: 'home',
+                })
             } 
         })
     

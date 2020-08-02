@@ -4,7 +4,7 @@
   "description": "Un Sitio similar a StackOverflow",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon",
+    "dev": "nodemon --ext js,hbs",
     "lint": "standard",
     "lint-fix": "standard --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,6 +13,8 @@
   "license": "MIT",
   "dependencies": {
     "@hapi/hapi": "^19.2.0",
-    "@hapi/inert": "^6.0.1"
+    "@hapi/inert": "^6.0.1",
+    "@hapi/vision": "^6.0.0",
+    "handlebars": "^4.7.6"
   }
 }
